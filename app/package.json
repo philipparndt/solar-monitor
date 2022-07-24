@@ -1,0 +1,46 @@
+{
+  "name": "solar-monitor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "start": "tsc && node dist/app/lib/index.js",
+    "clean": "rimraf dist",
+    "prebuild": "run-s clean",
+    "build": "ncc build lib/index.ts -o dist",
+    "lint": "eslint lib/** --ext .ts"
+  },
+  "author": "Arndt, Philipp",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "mqtt": "4.3.7",
+    "node-cron": "3.0.1",
+    "winston": "3.8.1",
+    "winston-transport": "4.5.0"
+  },
+  "devDependencies": {
+    "@types/jest": "28.1.4",
+    "@types/node": "16.11.43",
+    "@types/node-cron": "3.0.2",
+    "@typescript-eslint/eslint-plugin": "5.30.5",
+    "@typescript-eslint/parser": "5.30.5",
+    "@vercel/ncc": "0.34.0",
+    "eslint": "8.19.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "6.0.0",
+    "jest": "28.1.2",
+    "jest-junit": "14.0.0",
+    "jest-standard-reporter": "2.0.0",
+    "npm-run-all": "4.1.5",
+    "rimraf": "3.0.2",
+    "testcontainers": "8.11.0",
+    "ts-jest": "28.0.5",
+    "ts-node": "10.8.2",
+    "typescript": "4.7.4"
+
+  }
+}
