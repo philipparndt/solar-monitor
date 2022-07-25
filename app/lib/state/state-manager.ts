@@ -7,9 +7,11 @@ export class StateManager {
     to?: number
 
     last = new Date()
+    start = new Date()
 
     lastFrom?: Date
     lastTo?: Date
+    lastHigh?: Date
 
     differences: number[] = []
     values: number[] = []
@@ -22,6 +24,10 @@ export class StateManager {
     }
 
     onValue = (value: number) => {
+        if (value > 60) {
+            this.lastHigh = new Date()
+        }
+
         this.values.push(value)
         if (this.values.length > 200) {
             this.values = this.values.slice(1)

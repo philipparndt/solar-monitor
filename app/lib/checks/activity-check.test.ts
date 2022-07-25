@@ -2,12 +2,7 @@ import { checkActivity } from "./activity-check"
 import { getState, reset } from "../state/state-manager"
 import { applyConfig } from "../config/config"
 import config from "../../../production/config/config-example.json"
-
-function subtractHours (numOfHours: number, date = new Date()) {
-    date.setHours(date.getHours() - numOfHours)
-
-    return date
-}
+import { subtractHours } from "./high-check"
 
 describe("Activity check", () => {
     beforeEach(() => {

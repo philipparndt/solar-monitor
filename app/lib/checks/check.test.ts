@@ -2,6 +2,7 @@ import { getState, reset } from "../state/state-manager"
 import { doChecks } from "./index"
 import { applyConfig } from "../config/config"
 import config from "../../../production/config/config-example.json"
+import { checkHigh, subtractHours } from "./high-check"
 
 describe("Mean check", () => {
     beforeEach(() => {
@@ -32,5 +33,11 @@ describe("Mean check", () => {
         const state = getState()
         state.onValue(100)
         expect(doChecks()).toBe("Temperature to too high(100)")
+    })
+
+    test("high too long away", () => {
+        getState().lastHigh = subtractHours(3 * 24 + 1)
+        getState().start = subtractHours(4 * 24)
+        expect(checkHigh()).toMatch(/Last high was more than three days ago .*/i)
     })
 })
