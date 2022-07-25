@@ -4,10 +4,10 @@ import cron from "node-cron"
 import { sendMail } from "./mail/mailer"
 import { doChecks } from "./checks"
 
-export const hourlyCheck = () => {
+export const hourlyCheck = async () => {
     const result = doChecks()
     if (result) {
-        sendMail("ALERT", `Hourly check failed with error: ${result}`)
+        await sendMail("ALERT", `Hourly check failed with error: ${result}`)
     }
 }
 
@@ -20,7 +20,7 @@ export const startApp = async () => {
     const task = cron.schedule("0 * * * *", hourlyCheck)
     task.start()
 
-    sendMail("Started", "Application started.")
+    await sendMail("Started", "Application started.")
 
     return () => {
         mqttCleanUp()
