@@ -49,5 +49,4 @@ describe("Mean check", () => {
         expect(state.mean()).toStrictEqual(-9.5)
         expect(checkMean()).toBe("Temperature gain is too low (-9.5)")
     })
-
 })

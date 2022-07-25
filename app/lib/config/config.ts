@@ -44,15 +44,15 @@ const mqttDefaults = {
 
 const mailDefaults = {
     port: 465,
-    secure: true,
+    secure: true
 
 }
 
 export const applyDefaults = (config: any) => {
     return {
         ...config,
-        mqtt: {...mqttDefaults, ...config.mqtt},
-        mail: {...mailDefaults, ...config.mail},
+        mqtt: { ...mqttDefaults, ...config.mqtt },
+        mail: { ...mailDefaults, ...config.mail }
     } as Config
 }
 

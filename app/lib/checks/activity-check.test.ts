@@ -1,7 +1,7 @@
 import { checkActivity } from "./activity-check"
 import { getState, reset } from "../state/state-manager"
 
-function subtractHours(numOfHours: number, date = new Date()) {
+function subtractHours (numOfHours: number, date = new Date()) {
     date.setHours(date.getHours() - numOfHours)
 
     return date

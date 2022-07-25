@@ -60,7 +60,7 @@ export class StateManager {
             this.onDifference(difference)
 
             log.info(`difference: ${difference}`)
-            publish({temperature: difference}, "difference")
+            publish({ temperature: difference }, "difference")
         }
     }
 }
@@ -68,4 +68,6 @@ export class StateManager {
 let state = new StateManager()
 
 export const getState = () => state
-export const reset = () => state = new StateManager()
+export const reset = () => {
+    state = new StateManager()
+}

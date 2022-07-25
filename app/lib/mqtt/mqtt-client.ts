@@ -34,7 +34,7 @@ export const publishAbsolute = (message: any, fullTopic: string) => {
             return value
         }
     })
-    client.publish(fullTopic, body, {retain: config.mqtt.retain})
+    client.publish(fullTopic, body, { retain: config.mqtt.retain })
 }
 
 const brideTopic = () => {
@@ -52,7 +52,7 @@ const online = () => {
 const willMessage = () => {
     const config = getAppConfig()
     if (config.mqtt["bridge-info"]) {
-        return {topic: brideTopic(), payload: "offline", qos: config.mqtt.qos, retain: config.mqtt.retain}
+        return { topic: brideTopic(), payload: "offline", qos: config.mqtt.qos, retain: config.mqtt.retain }
     }
     else {
         return undefined

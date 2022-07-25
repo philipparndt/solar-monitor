@@ -7,7 +7,7 @@ export class TestLogger {
     output = ""
     transports: Transport[]
 
-    constructor() {
+    constructor () {
         const stream = new Writable()
         stream._write = (chunk, encoding, next) => {
             this.output = this.output += chunk.toString()
@@ -15,7 +15,7 @@ export class TestLogger {
         }
         this.transports = [...log.transports]
         log.clear()
-        log.add(new winston.transports.Stream({stream}))
+        log.add(new winston.transports.Stream({ stream }))
     }
 
     close = () => {

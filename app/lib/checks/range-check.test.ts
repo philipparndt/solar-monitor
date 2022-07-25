@@ -1,5 +1,4 @@
 import { getState, reset } from "../state/state-manager"
-import { checkMean } from "./mean-check"
 import { checkRange } from "./range-check"
 
 describe("Range check", () => {

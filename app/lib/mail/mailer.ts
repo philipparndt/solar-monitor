@@ -7,11 +7,11 @@ export const sendMail = async (title: string, message: string) => {
     console.log(config)
 
     // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport(config as any)
+    const transporter = nodemailer.createTransport(config as any)
 
     try {
         // send mail with defined transport object
-        let info = await transporter.sendMail({
+        const info = await transporter.sendMail({
             from: config.from,
             to: config.to,
             subject: `Solar Monitor: ${title}`,
