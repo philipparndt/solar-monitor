@@ -1,8 +1,11 @@
 import { getState, reset } from "../state/state-manager"
 import { doChecks } from "./index"
+import { applyConfig } from "../config/config"
+import config from "../../../production/config/config-example.json"
 
 describe("Mean check", () => {
     beforeEach(() => {
+        applyConfig(config)
         reset()
         getState().lastFrom = new Date()
         getState().lastTo = new Date()

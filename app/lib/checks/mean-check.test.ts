@@ -1,8 +1,11 @@
 import { getState, reset } from "../state/state-manager"
 import { checkMean } from "./mean-check"
+import { applyConfig } from "../config/config"
+import config from "../../../production/config/config-example.json"
 
 describe("Mean check", () => {
     beforeEach(() => {
+        applyConfig(config)
         reset()
     })
 

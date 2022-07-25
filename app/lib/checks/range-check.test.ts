@@ -1,8 +1,11 @@
 import { getState, reset } from "../state/state-manager"
 import { checkRange } from "./range-check"
+import { applyConfig } from "../config/config"
+import config from "../../../production/config/config-example.json"
 
 describe("Range check", () => {
     beforeEach(() => {
+        applyConfig(config)
         reset()
     })
 
@@ -19,7 +22,7 @@ describe("Range check", () => {
 
     test("range good", () => {
         const state = getState()
-        state.onValue(50)
+        state.onValue(30)
         state.onValue(90)
         expect(checkRange()).toBeUndefined()
     })
@@ -33,8 +36,8 @@ describe("Range check", () => {
 
     test("too low", () => {
         const state = getState()
-        state.onValue(49)
+        state.onValue(29)
         state.onValue(90)
-        expect(checkRange()).toBe("Temperature to too low(49)")
+        expect(checkRange()).toBe("Temperature to too low(29)")
     })
 })

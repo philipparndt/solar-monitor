@@ -28,9 +28,20 @@ export type ConfigMail = {
     to: string
 }
 
+type ConfigChecks = {
+    gain: {
+        minimum: number
+    },
+    range: {
+        minimum: number,
+        maximum: number
+    }
+}
+
 export type Config = {
     mqtt: ConfigMqtt
     solar: ConfigSolar
+    checks: ConfigChecks
     mail: ConfigMail
 }
 
@@ -45,14 +56,24 @@ const mqttDefaults = {
 const mailDefaults = {
     port: 465,
     secure: true
+}
 
+const checksDefault = {
+    gain: {
+        minimum: -3
+    },
+    range: {
+        minimum: 30,
+        maximum: 90
+    }
 }
 
 export const applyDefaults = (config: any) => {
     return {
         ...config,
         mqtt: { ...mqttDefaults, ...config.mqtt },
-        mail: { ...mailDefaults, ...config.mail }
+        mail: { ...mailDefaults, ...config.mail },
+        checks: { ...checksDefault, ...config.checks }
     } as Config
 }
 

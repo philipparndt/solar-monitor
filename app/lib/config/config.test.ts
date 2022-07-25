@@ -34,6 +34,15 @@ describe("Config", () => {
                 from_solar_topic: "haus/ug/heizung/solar_vl",
                 to_solar_topic: "haus/ug/heizung/solar_rl"
             },
+            checks: {
+                gain: {
+                    minimum: -3
+                },
+                range: {
+                    maximum: 90,
+                    minimum: 30
+                }
+            },
             mail: {
                 host: "smtp.example.com",
                 port: 465,
