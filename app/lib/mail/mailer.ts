@@ -4,7 +4,6 @@ import { log } from "../logger"
 
 export const sendMail = async (title: string, message: string) => {
     const config = getAppConfig().mail
-    console.log(config)
 
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport(config as any)

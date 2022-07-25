@@ -63,7 +63,6 @@ export const loadConfig = (file: string) => {
 
 export const applyConfig = (config: any) => {
     appConfig = applyDefaults(config)
-    console.log(appConfig)
 }
 
 export const getAppConfig = () => {
