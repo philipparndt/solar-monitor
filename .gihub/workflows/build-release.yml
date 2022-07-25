@@ -1,0 +1,88 @@
+name: Build release
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseType:
+        description: Release type
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: philipparndt/get-release-number@v1
+        id: next
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          releaseType: ${{ github.event.inputs.releaseType }}
+
+      - name: Update version
+        working-directory: app
+        env:
+          RELEASE_VERSION: ${{ steps.next.outputs.version }}
+        run: npm version $RELEASE_VERSION --allow-same-version
+
+      - name: Install
+        working-directory: app
+        shell: bash
+        run: npm install
+
+      - name: Build
+        working-directory: app
+        shell: bash
+        run: npm run build
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build docker container and push
+        id: docker_build
+        uses: docker/build-push-action@v3
+        env:
+          RELEASE_VERSION: ${{ steps.next.outputs.version }}
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
+          push: true
+          tags: |
+            pharndt/solarmonitor:latest
+            pharndt/solarmonitor:${{env.RELEASE_VERSION}}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ steps.next.outputs.version }}
+        with:
+          tag_name: ${{env.RELEASE_VERSION}}
+          release_name: ${{env.RELEASE_VERSION}}
+          body: |
+            Docker tag: `pharndt/solarmonitor:${{env.RELEASE_VERSION}}`
+
+            Changes in this Release
+              - Dependency update
+              - ...
+
+          draft: false
+          prerelease: false

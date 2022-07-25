@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  huemqtt:
+    hostname: solarmonitor
+    image: pharndt/solarmonitor:${VERSION}
+    build: .
+    volumes:
+      - ./production/config:/var/lib/solarmonitor:ro
+    restart: "no"

@@ -1,0 +1,19 @@
+{
+    "mqtt": {
+        "url": "tcp://mqtt.example.com:1883",
+        "topic": "solar-monitor"
+    },
+    "solar": {
+        "from_solar_topic": "home/solar_vl",
+        "to_solar_topic": "home/solar_rl"
+    },
+    "mail": {
+        "host": "smtp.example.com",
+        "auth": {
+            "user": "mail@example.com",
+            "pass": "password"
+        },
+        "from": "\"Solar Monitor\" <mail@example.com>",
+        "to": "mail@example.com"
+    }
+}
