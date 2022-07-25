@@ -1,5 +1,4 @@
 import { getState } from "../state/state-manager"
-import { getAppConfig } from "../config/config"
 
 export const subtractHours = (numOfHours: number, date = new Date()) => {
     date.setHours(date.getHours() - numOfHours)
