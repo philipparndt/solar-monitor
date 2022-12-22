@@ -14,15 +14,15 @@ describe("High check", () => {
         expect(checkHigh()).toBeUndefined()
     })
 
-    test("never high with the last thee days", () => {
+    test("never high with the last seven days", () => {
         getState().lastHigh = undefined
-        getState().start = subtractHours(4 * 24)
-        expect(checkHigh()).toBe("Neven seen a high temperature within the last three days")
+        getState().start = subtractHours(8 * 24)
+        expect(checkHigh()).toBe("Neven seen a high temperature within the last seven days")
     })
 
     test("last high too long away", () => {
-        getState().lastHigh = subtractHours(3 * 24 + 1)
+        getState().lastHigh = subtractHours(7 * 24 + 1)
         getState().start = subtractHours(4 * 24)
-        expect(checkHigh()).toMatch(/Last high was more than three days ago .*/i)
+        expect(checkHigh()).toMatch(/Last high was more than seven days ago .*/i)
     })
 })
