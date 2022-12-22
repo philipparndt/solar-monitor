@@ -36,8 +36,8 @@ describe("Mean check", () => {
     })
 
     test("high too long away", () => {
-        getState().lastHigh = subtractHours(3 * 24 + 1)
+        getState().lastHigh = subtractHours(7 * 24 + 1)
         getState().start = subtractHours(4 * 24)
-        expect(checkHigh()).toMatch(/Last high was more than three days ago .*/i)
+        expect(checkHigh()).toMatch(/Last high was more than seven days ago .*/i)
     })
 })
