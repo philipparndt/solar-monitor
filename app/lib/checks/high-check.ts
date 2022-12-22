@@ -10,7 +10,7 @@ export const checkHigh = () => {
     const state = getState()
     const lastHigh = state.lastHigh
 
-    const threeDaysAgo = subtractHours(24 * 3, new Date())
+    const threeDaysAgo = subtractHours(24 * 7, new Date())
     if (!lastHigh) {
         if (threeDaysAgo.getTime() > state.start.getTime()) {
             return "Neven seen a high temperature within the last three days"
