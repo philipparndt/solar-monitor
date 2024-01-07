@@ -44,6 +44,7 @@ export type Config = {
     solar: ConfigSolar
     checks: ConfigChecks
     mail: ConfigMail
+    loglevel: string
 }
 
 let appConfig: Config
@@ -69,8 +70,13 @@ const checksDefault = {
     }
 }
 
+const configDefaults = {
+    loglevel: "info"
+}
+
 export const applyDefaults = (config: any) => {
     return {
+        ...configDefaults,
         ...config,
         mqtt: { ...mqttDefaults, ...config.mqtt },
         mail: { ...mailDefaults, ...config.mail },
@@ -96,6 +102,7 @@ export const loadConfig = (file: string) => {
 
 export const applyConfig = (config: any) => {
     appConfig = applyDefaults(config)
+    log.configure(appConfig.loglevel.toUpperCase())
 }
 
 export const getAppConfig = () => {

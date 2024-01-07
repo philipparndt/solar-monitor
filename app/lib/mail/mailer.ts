@@ -17,9 +17,9 @@ export const sendMail = async (title: string, message: string) => {
             text: message
         })
 
-        log.info(`Mail sent: ${info.messageId}`)
+        log.info("Mail sent", info.messageId)
     }
     catch (e) {
-        log.info(`Error sending mail: ${e}`)
+        log.error("Error sending mail", e)
     }
 }
