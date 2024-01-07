@@ -54,7 +54,7 @@ describe("Config", () => {
                 from: "\"Solar Monitor\" <user@example.com>",
                 to: "user@example.com"
             },
-            "loglevel": "info",
+            loglevel: "info"
         })
     })
 })
